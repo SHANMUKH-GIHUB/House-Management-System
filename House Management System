@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>House Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      background: #023e8a;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 20px auto;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+    }
+    button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #023e8a;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🏠 House Management System</h1>
+    <p>Find your perfect 1BHK, 2BHK, or 3BHK flat</p>
+  </header>
+
+  <nav>
+    <a onclick="showSection('home')">Home</a>
+    <a onclick="showSection('bhk1')">1BHK</a>
+    <a onclick="showSection('bhk2')">2BHK</a>
+    <a onclick="showSection('bhk3')">3BHK</a>
+    <a onclick="showSection('contact')">Contact</a>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home" class="container active">
+    <h2>Search Flats</h2>
+    <input type="text" id="search" onkeyup="searchFlats()" placeholder="Search by BHK or price...">
+
+    <div class="card">
+      <h3>1BHK Flat - $500/month</h3>
+      <p>Location: City Center</p>
+      <p>Features: Furnished, Balcony</p>
+    </div>
+
+    <div class="card">
+      <h3>2BHK Flat - $800/month</h3>
+      <p>Location: Green Park</p>
+      <p>Features: Parking, Modular Kitchen</p>
+    </div>
+
+    <div class="card">
+      <h3>3BHK Flat - $1200/month</h3>
+      <p>Location: Near Lake View</p>
+      <p>Features: 2 Bathrooms, Garden</p>
+    </div>
+  </section>
+
+  <!-- 1BHK Section -->
+  <section id="bhk1" class="container">
+    <h2>1BHK Flats</h2>
+    <div class="card">
+      <h3>1BHK - $500/month</h3>
+      <p>Location: City Center</p>
+      <p>Features: Furnished, Balcony</p>
+    </div>
+    <div class="card">
+      <h3>1BHK - $550/month</h3>
+      <p>Location: Near Metro</p>
+      <p>Features: Semi-furnished</p>
+    </div>
+  </section>
+
+  <!-- 2BHK Section -->
+  <section id="bhk2" class="container">
+    <h2>2BHK Flats</h2>
+    <div class="card">
+      <h3>2BHK - $800/month</h3>
+      <p>Location: Green Park</p>
+      <p>Features: Parking, Modular Kitchen</p>
+    </div>
+    <div class="card">
+      <h3>2BHK - $900/month</h3>
+      <p>Location: Riverside</p>
+      <p>Features: Furnished, Garden View</p>
+    </div>
+  </section>
+
+  <!-- 3BHK Section -->
+  <section id="bhk3" class="container">
+    <h2>3BHK Flats</h2>
+    <div class="card">
+      <h3>3BHK - $1200/month</h3>
+      <p>Location: Lake View</p>
+      <p>Features: 2 Bathrooms, Garden</p>
+    </div>
+    <div class="card">
+      <h3>3BHK - $1500/month</h3>
+      <p>Location: Downtown</p>
+      <p>Features: Luxury Furnished, Parking</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <h2>Contact / Book a Flat</h2>
+    <form>
+      <label>Name:</label>
+      <input type="text" placeholder="Enter your name" required>
+
+      <label>Email:</label>
+      <input type="email" placeholder="Enter your email" required>
+
+      <label>Flat Type:</label>
+      <select required>
+        <option value="">--Select--</option>
+        <option>1BHK</option>
+        <option>2BHK</option>
+        <option>3BHK</option>
+      </select>
+
+      <label>Message:</label>
+      <textarea placeholder="Enter your message" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <script>
+    function showSection(id) {
+      let sections = document.querySelectorAll("section");
+      sections.forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function searchFlats() {
+      let input = document.getElementById("search").value.toLowerCase();
+      let cards = document.querySelectorAll("#home .card");
+
+      cards.forEach(card => {
+        let text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
